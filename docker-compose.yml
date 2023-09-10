@@ -15,6 +15,18 @@ services:
       - 3000:3000
       - 9229:9229
     command: npm run start:debug
+    depends_on:
+      - auth_service_db
+   auth_service_db:
+    container_name: auth_service_db
+    image: mongo
+    volumes:
+      - ./auth/db:/data/db
+    restart: always
+    ports:
+      - 27017:27017
+    networks:
+      - trantor_market_network
 networks:
   trantor_market_network:
     driver: bridge
