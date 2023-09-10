@@ -4,3 +4,7 @@ env.*
 dist
 .DS_Store
 ./auth/node_modules
+./auth/dist
+./auth/.env
+./auth/env.*
+./auth/db
