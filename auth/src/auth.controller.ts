@@ -2,6 +2,7 @@ import { Body, Controller, Get, Param, Post, ValidationPipe } from '@nestjs/comm
 import { AuthService } from './auth.service';
 import { AuthCrendentialsDto } from './dto/auth-credentials.dto';
 import { AccessToken } from './jwt-payload.interface';
+import { User } from './user/user.model';
 @Controller('auth')
 export class AuthController {
 
@@ -9,7 +10,7 @@ export class AuthController {
 
     }
     @Post('/signup')
-    public async signUp(@Body(ValidationPipe) authCrendentialsDto: AuthCrendentialsDto): Promise<boolean> {
+    public async signUp(@Body(ValidationPipe) authCrendentialsDto: AuthCrendentialsDto): Promise<User> {
         return this.authService.signUp(authCrendentialsDto);
     }
 

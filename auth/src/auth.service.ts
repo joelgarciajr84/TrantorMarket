@@ -2,18 +2,20 @@ import { HttpException, HttpStatus, Injectable, Logger, UnauthorizedException } 
 import { JwtService } from '@nestjs/jwt';
 import { AuthCrendentialsDto } from './dto/auth-credentials.dto';
 import { AccessToken, JwtPayload } from './jwt-payload.interface';
+import { UserService } from './user/user.service';
+import { User } from './user/user.model';
 
 @Injectable()
 export class AuthService {
     private users: Array<AuthCrendentialsDto> = []
     constructor(
-        private readonly jwtService: JwtService
+        private readonly jwtService: JwtService,
+        private readonly userService: UserService
     ) { }
 
-    public async signUp(authCredentialsDto: AuthCrendentialsDto): Promise<boolean> {
+    public async signUp(authCredentialsDto: AuthCrendentialsDto): Promise<User> {
         try {
-
-            return !!this.users.push(authCredentialsDto)
+            return this.userService.createUser(authCredentialsDto)
         } catch (error) {
             console.debug(error)
             throw new Error("Error on insert new user");

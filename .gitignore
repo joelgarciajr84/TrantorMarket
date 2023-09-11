@@ -8,3 +8,5 @@ dist
 ./auth/.env
 ./auth/env.*
 ./auth/db
+/db
+/auth/db/*
